@@ -20,10 +20,10 @@ PYBIND11_MODULE(matrix, m) {
 
     py::class_<Matrix>(m, "matrix")
         .def(py::init<std::vector<int>&, DTypes>(), py::arg("shape"), py::arg("type") = DTypes::Real64)
-        .def("__str__", &Matrix::toString);
-        //.def_static("ones", &Matrix::ones, py::arg("shape"), py::arg("type") = 0)
-        //.def_static("zero", &Matrix::zero, py::arg("shape"), py::arg("type") = 0)
-        //.def_static("fill", &Matrix::fill, py::arg("shape"), py::arg("type") = 0, py::arg("fill") = 0);
+        .def("__str__", &Matrix::toString)
+        .def_static("ones", &Matrix::ones, py::arg("shape"), py::arg("type") = DTypes::Real64)
+        .def_static("zero", &Matrix::zero, py::arg("shape"), py::arg("type") = DTypes::Real64);
+        //.def_static("fill", &Matrix::fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0);
 
 
 }

@@ -138,15 +138,10 @@
     <ClCompile Include="CreationRoutines.cpp" />
     <ClCompile Include="PyBinder.cpp" />
     <ClCompile Include="Constructors.cpp" />
-    <ClCompile Include="Small Helper Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DTypes.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="Small Helper Functions.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
