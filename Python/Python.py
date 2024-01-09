@@ -1,4 +1,5 @@
-import matrix
+import matrix as mp
 
-a = matrix.matrix([1])
+a = mp.matrix.ones([1,2,3])
+
 print(a)
