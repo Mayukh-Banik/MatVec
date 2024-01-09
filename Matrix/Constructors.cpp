@@ -1,5 +1,6 @@
 #include "Matrix.h"
-#include <stdlib.h>
+//#include <stdlib.h>
+#include <cstdlib>
 #include <vector>
 #include <iostream>
 #include <pybind11/stl.h>
