@@ -1,7 +1,6 @@
 #include "Small Helper Functions.h"
 
-void helper_fill(void* pointer, unsigned long long int elements, 
-	long double fill, int type)
+void helper_fill(void* pointer, unsigned long long int elements, long double fill, int type)
 {
 	if (type == 0)
 	{

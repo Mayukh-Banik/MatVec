@@ -141,6 +141,7 @@
     <ClCompile Include="Small Helper Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DTypes.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Small Helper Functions.h" />
   </ItemGroup>
