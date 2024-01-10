@@ -8,3 +8,5 @@ arrays.
 Loading from CSVs will be supported to ensure a test suite.
 
 The goal is to support multithreading, using C threads or GPUs.
+
+Currently mainly aimed at 2D Matrixes.
