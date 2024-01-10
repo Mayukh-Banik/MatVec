@@ -8,9 +8,16 @@
 #include <cstdint>
 #include <cfloat>
 
+Matrix::Matrix()
+{
+	this->elements = 0;
+	this->type = Real64;
+	this->size = 0;
+}
+
 Matrix::Matrix(std::vector<int>& shape, DTypes type)
 {
-	this->shape = shape;
+	this->shape = std::vector<int>(shape);
 	this->type = type;
 	unsigned long long int product = 1;
 	for (int i = 0; i < shape.size(); i++)
@@ -93,7 +100,15 @@ std::string Matrix::toString() {
 			result += std::to_string(static_cast<double>(static_cast<dReal64*>(this->matrix)[i]));
 			break;
 		}
-		result += " ";
+
+		if ((i+1) % this->shape[0] == 0)
+		{
+			result += "\n";
+		}
+		else
+		{
+			result += " ";
+		}
 	}
 
 	return result;

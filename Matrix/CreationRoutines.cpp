@@ -129,33 +129,33 @@ Matrix* Matrix::rand(std::vector<int>& shape, DTypes type, int seed)
     unsigned long long int product = m->elements;
     for (unsigned long long int i = 0; i < m->elements; i++)
     {
-        std::srand(seed == 0 ? std::time(nullptr) : seed);
-        int value = std::rand();
+        std::srand(seed == 0 ? static_cast<unsigned int> (std::time(nullptr)) : seed);
+        //int value = std::rand();
         switch (type)
         {
         case Int8:
-            static_cast<dInt8*>(m->matrix)[i] = static_cast<dInt8>(value);
+            static_cast<dInt8*>(m->matrix)[i] = static_cast<dInt8>(std::rand());
             break;
         case Int16:
-            static_cast<dInt16*>(m->matrix)[i] = static_cast<dInt16>(value);
+            static_cast<dInt16*>(m->matrix)[i] = static_cast<dInt16>(std::rand());
             break;
         case Int32:
-            static_cast<dInt32*>(m->matrix)[i] = static_cast<dInt32>(value);
+            static_cast<dInt32*>(m->matrix)[i] = static_cast<dInt32>(std::rand());
             break;
         case Int64:
-            static_cast<dInt64*>(m->matrix)[i] = static_cast<dInt64>(value);
+            static_cast<dInt64*>(m->matrix)[i] = static_cast<dInt64>(std::rand());
             break;
         case Real32:
-            static_cast<dReal32*>(m->matrix)[i] = static_cast<dReal32>(value);
+            static_cast<dReal32*>(m->matrix)[i] = static_cast<dReal32>(std::rand());
             break;
         case Real64:
-            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(value);
+            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(std::rand());
             break;
         case Real64T:
-            static_cast<dReal64T*>(m->matrix)[i] = static_cast<dReal64T>(value);
+            static_cast<dReal64T*>(m->matrix)[i] = static_cast<dReal64T>(std::rand());
             break;
         default:
-            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(value);
+            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(std::rand());
             break;
         }
     }

@@ -3,7 +3,8 @@
 #define PYBIND11_DOCSTRINGS
 #include <pybind11/stl.h>
 #include "DTypes.h"
-#include <iostream>
+
+
 class Matrix
 {
 private:
@@ -14,6 +15,7 @@ public:
 	DTypes type;
 	size_t size;
 
+	Matrix();
 	Matrix(std::vector<int>& shape, DTypes type = Real64);
 	~Matrix();
 	std::string toString();
@@ -67,5 +69,8 @@ public:
 
 
 	static Matrix* array(std::vector<std::vector<int>>& value, DTypes type = Real64);
+
+	static Matrix* readCSV(const std::string& filepath, DTypes type = Real64);
+	static bool writeCSV(const std::string& filepath, Matrix* m);
 };
 

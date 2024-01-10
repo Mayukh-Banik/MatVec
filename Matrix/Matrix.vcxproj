@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CreationRoutines.cpp" />
+    <ClCompile Include="Files.cpp" />
     <ClCompile Include="PyBinder.cpp" />
     <ClCompile Include="Constructors.cpp" />
   </ItemGroup>
