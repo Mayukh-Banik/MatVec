@@ -85,11 +85,11 @@ Matrix* Matrix::fill(std::vector<int>& shape, DTypes type, long double value)
     return m;
 }
 
-Matrix* Matrix::identity(std::vector<int>& shape, DTypes type)
+Matrix* Matrix::identity(int n, DTypes type)
 {
+    std::vector<int> shape = { n, n };
     Matrix* m = new Matrix(shape, type);
     memset(m->matrix, 0, m->size);
-    int n = shape[0];
     for (int i = 0; i < n; i++)
     {
         switch (type)
