@@ -85,8 +85,6 @@ Matrix* Matrix::fill(std::vector<int>& shape, DTypes type, long double value)
     return m;
 }
 
-#include <iostream>
-
 Matrix* Matrix::identity(std::vector<int>& shape, DTypes type)
 {
     Matrix* m = new Matrix(shape, type);
