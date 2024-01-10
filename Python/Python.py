@@ -1,3 +1,10 @@
 import matrix as mp
 
-help(mp)
+try:
+    print("start")
+    a = mp.matrix.identity([4, 4])
+    print(a)    
+except Exception:
+    print("Error")
+
+

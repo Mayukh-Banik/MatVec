@@ -22,8 +22,8 @@ PYBIND11_MODULE(matrix, m) {
         .def(py::init<std::vector<int>&, DTypes>(), py::arg("shape"), py::arg("type") = DTypes::Real64)
         .def("__str__", &Matrix::toString)
         .def_static("ones", &Matrix::ones, py::arg("shape"), py::arg("type") = DTypes::Real64)
-        .def_static("zero", &Matrix::zero, py::arg("shape"), py::arg("type") = DTypes::Real64);
-        //.def_static("fill", &Matrix::fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0);
-
-
+        .def_static("zero", &Matrix::zero, py::arg("shape"), py::arg("type") = DTypes::Real64)
+        .def_static("fill", &Matrix::fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0)
+        .def_static("identity", &Matrix::identity, py::arg("n"), py::arg("type") = DTypes::Real64)
+        .def_static("rand", &Matrix::rand, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("seed") = 0);
 }

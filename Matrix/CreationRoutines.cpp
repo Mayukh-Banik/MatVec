@@ -1,56 +1,53 @@
 #include "Matrix.h"
 #include <cstring>
+#include <cstdlib>
+#include <ctime>
 
-Matrix* Matrix::ones(std::vector<int>& shape, DTypes type) 
+Matrix* Matrix::ones(std::vector<int>& shape, DTypes type)
 {
     Matrix* m = new Matrix(shape, type);
-    unsigned long long int product = m->elements;
     for (unsigned long long int i = 0; i < m->elements; i++)
     {
         switch (type)
         {
         case Int8:
-            ((dInt8*)m->matrix)[i] = 1;
+            static_cast<dInt8*>(m->matrix)[i] = 1;
             break;
         case Int16:
-            ((dInt16*)m->matrix)[i] = 1;
+            static_cast<dInt16*>(m->matrix)[i] = 1;
             break;
         case Int32:
-            ((dInt32*)m->matrix)[i] = 1;
+            static_cast<dInt32*>(m->matrix)[i] = 1;
             break;
         case Int64:
-            ((dInt64*)m->matrix)[i] = 1;
+            static_cast<dInt64*>(m->matrix)[i] = 1;
             break;
         case Real32:
-            ((dReal32*)m->matrix)[i] = 1;
+            static_cast<dReal32*>(m->matrix)[i] = 1;
             break;
         case Real64:
-            ((dReal64*)m->matrix)[i] = 1;
+            static_cast<dReal64*>(m->matrix)[i] = 1;
             break;
         case Real64T:
-            ((dReal64T*)m->matrix)[i] = 1;
+            static_cast<dReal64T*>(m->matrix)[i] = 1;
             break;
         default:
-            ((dReal64*)m->matrix)[i] = 1;
+            static_cast<dReal64*>(m->matrix)[i] = 1;
             break;
         }
     }
     return m;
 }
-//
+
 Matrix* Matrix::zero(std::vector<int>& shape, DTypes type)
 {
     Matrix* m = new Matrix(shape, type);
     unsigned long long int product = m->elements;
-
-    // Calculate the total size in bytes
     size_t totalSizeInBytes = product * (type == 0 ? sizeof(int) : sizeof(double));
-
-    // Use memset to set the memory to zero
     memset(m->matrix, 0, totalSizeInBytes);
     return m;
 }
-//
+
 Matrix* Matrix::fill(std::vector<int>& shape, DTypes type, long double value)
 {
     Matrix* m = new Matrix(shape, type);
@@ -60,45 +57,109 @@ Matrix* Matrix::fill(std::vector<int>& shape, DTypes type, long double value)
         switch (type)
         {
         case Int8:
-            ((dInt8*)m->matrix)[i] = (dInt8)value;
+            static_cast<dInt8*>(m->matrix)[i] = static_cast<dInt8>(value);
             break;
         case Int16:
-            ((dInt16*)m->matrix)[i] = (dInt16)value;
+            static_cast<dInt16*>(m->matrix)[i] = static_cast<dInt16>(value);
             break;
         case Int32:
-            ((dInt32*)m->matrix)[i] = (dInt32)value;
+            static_cast<dInt32*>(m->matrix)[i] = static_cast<dInt32>(value);
             break;
         case Int64:
-            ((dInt64*)m->matrix)[i] = (dInt64)value;
+            static_cast<dInt64*>(m->matrix)[i] = static_cast<dInt64>(value);
             break;
         case Real32:
-            ((dReal32*)m->matrix)[i] = (dReal32)value;
+            static_cast<dReal32*>(m->matrix)[i] = static_cast<dReal32>(value);
             break;
         case Real64:
-            ((dReal64*)m->matrix)[i] = (dReal64)value;
+            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(value);
             break;
         case Real64T:
-            ((dReal64T*)m->matrix)[i] = (dReal64T)value;
+            static_cast<dReal64T*>(m->matrix)[i] = static_cast<dReal64T>(value);
             break;
         default:
-            ((dReal64*)m->matrix)[i] = (dReal64)value;
+            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(value);
             break;
         }
     }
     return m;
 }
-//
-//Matrix* Matrix::idnt(std::vector<int>& shape, int type)
-//{
-//    Matrix* m = new Matrix(shape, type);
-//    unsigned long long int product = m->elements;
-//    if (type == 0)
-//    {
-//        int* temp = (int*)m->matrix;
-//    }
-//    else
-//    {
-//        double* temp = (double*)m->matrix;
-//    }
-//    return m;
-//}
+
+#include <iostream>
+
+Matrix* Matrix::identity(std::vector<int>& shape, DTypes type)
+{
+    Matrix* m = new Matrix(shape, type);
+    memset(m->matrix, 0, m->size);
+    int n = shape[0];
+    for (int i = 0; i < n; i++)
+    {
+        switch (type)
+        {
+        case Int8:
+            static_cast<dInt8*>(m->matrix)[i * n + i] = static_cast<dInt8>(1);
+            break;
+        case Int16:
+            static_cast<dInt16*>(m->matrix)[i * n + i] = static_cast<dInt16>(1);
+            break;
+        case Int32:
+            static_cast<dInt32*>(m->matrix)[i * n + i] = static_cast<dInt32>(1);
+            break;
+        case Int64:
+            static_cast<dInt64*>(m->matrix)[i * n + i] = static_cast<dInt64>(1);
+            break;
+        case Real32:
+            static_cast<dReal32*>(m->matrix)[i * n + i] = static_cast<dReal32>(1);
+            break;
+        case Real64:
+            static_cast<dReal64*>(m->matrix)[i * n + i] = static_cast<dReal64>(1);
+            break;
+        case Real64T:
+            static_cast<dReal64T*>(m->matrix)[i * n + i] = static_cast<dReal64T>(1);
+            break;
+        default:
+            static_cast<dReal64*>(m->matrix)[i * n + i] = static_cast<dReal64>(1);
+            break;
+        }
+    }
+    return m;
+}
+
+Matrix* Matrix::rand(std::vector<int>& shape, DTypes type, int seed)
+{
+    Matrix* m = new Matrix(shape, type);
+    unsigned long long int product = m->elements;
+    for (unsigned long long int i = 0; i < m->elements; i++)
+    {
+        std::srand(seed == 0 ? std::time(nullptr) : seed);
+        int value = std::rand();
+        switch (type)
+        {
+        case Int8:
+            static_cast<dInt8*>(m->matrix)[i] = static_cast<dInt8>(value);
+            break;
+        case Int16:
+            static_cast<dInt16*>(m->matrix)[i] = static_cast<dInt16>(value);
+            break;
+        case Int32:
+            static_cast<dInt32*>(m->matrix)[i] = static_cast<dInt32>(value);
+            break;
+        case Int64:
+            static_cast<dInt64*>(m->matrix)[i] = static_cast<dInt64>(value);
+            break;
+        case Real32:
+            static_cast<dReal32*>(m->matrix)[i] = static_cast<dReal32>(value);
+            break;
+        case Real64:
+            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(value);
+            break;
+        case Real64T:
+            static_cast<dReal64T*>(m->matrix)[i] = static_cast<dReal64T>(value);
+            break;
+        default:
+            static_cast<dReal64*>(m->matrix)[i] = static_cast<dReal64>(value);
+            break;
+        }
+    }
+    return m;
+}
