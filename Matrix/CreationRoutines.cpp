@@ -161,3 +161,13 @@ Matrix* Matrix::rand(std::vector<int>& shape, DTypes type, int seed)
     }
     return m;
 }
+
+Matrix* Matrix::array(std::vector<std::vector<int>>& value, DTypes type)
+{
+    unsigned long long int elements = 0;
+    for (std::vector<int> temp : value)
+    {
+        elements = elements + temp.size();
+    }
+    return nullptr;
+}

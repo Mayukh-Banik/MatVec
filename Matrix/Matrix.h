@@ -3,7 +3,7 @@
 #define PYBIND11_DOCSTRINGS
 #include <pybind11/stl.h>
 #include "DTypes.h"
-
+#include <iostream>
 class Matrix
 {
 private:
@@ -60,8 +60,12 @@ public:
 	 *	Calls Constructor, potentially throws an exception, which will not be handled.
 	 * @param shape Automatic Casting from Python List
 	 * @param type Corresponds to data types from C++ Libraries
+	 * @param seed Seed
 	 * @return New Instance of Matrix
 	*/
 	static Matrix* rand(std::vector<int>& shape, DTypes type = Real64, int seed = 0);
+
+
+	static Matrix* array(std::vector<std::vector<int>>& value, DTypes type = Real64);
 };
 
