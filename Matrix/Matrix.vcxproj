@@ -135,14 +135,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ASMDT.cpp" />
     <ClCompile Include="CreationRoutines.cpp" />
-    <ClCompile Include="Files.cpp" />
+    <ClCompile Include="FileOps.cpp" />
     <ClCompile Include="PyBinder.cpp" />
     <ClCompile Include="Constructors.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CreationRoutines.h" />
     <ClInclude Include="DTypes.h" />
+    <ClInclude Include="FileOps.h" />
     <ClInclude Include="Matrix.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

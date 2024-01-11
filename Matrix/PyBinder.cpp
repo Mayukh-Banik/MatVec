@@ -2,11 +2,13 @@
 #include <pybind11/pybind11.h>
 #include "Matrix.h"
 #include "DTypes.h"
+#include "CreationRoutines.h"
+#include "FileOps.h"
 
 PYBIND11_MODULE(matrix, m) {
     namespace py = pybind11;
 
-    m.doc() = "A Poor Attempt at Recreating NumPy";
+    m.doc() = "A Poor Attempt at Recreating NumPy for Matrices Only";
 
     py::enum_<DTypes>(m, "DTypes")
         .value("Int8", DTypes::Int8)
@@ -20,13 +22,13 @@ PYBIND11_MODULE(matrix, m) {
 
     py::class_<Matrix>(m, "matrix")
         .def(py::init<std::vector<int>&, DTypes>(), py::arg("shape"), py::arg("type") = DTypes::Real64)
-        .def("__str__", &Matrix::toString)
-        .def_static("ones", &Matrix::ones, py::arg("shape"), py::arg("type") = DTypes::Real64)
-        .def_static("zero", &Matrix::zero, py::arg("shape"), py::arg("type") = DTypes::Real64)
-        .def_static("fill", &Matrix::fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0)
-        .def_static("identity", &Matrix::identity, py::arg("n"), py::arg("type") = DTypes::Real64)
-        .def_static("rand", &Matrix::rand, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("seed") = 0)
-        .def_static("readCSV", &Matrix::readCSV, py::arg("file"), py::arg("type") = DTypes::Real64)
-        .def_static("writeCSV", &Matrix::writeCSV, py::arg("file"), py::arg("Matrix"))
-        ;
+        .def("__str__", &Matrix::toString);
+        
+    m.def("readCSV", readCSV, py::arg("file"), py::arg("type") = DTypes::Real64);
+    m.def("writeCSV", writeCSV, py::arg("file"), py::arg("Matrix"));
+    m.def("ones", &ones, py::arg("shape"), py::arg("type") = DTypes::Real64);
+    m.def("zero", &zero, py::arg("shape"), py::arg("type") = DTypes::Real64);
+    m.def("fill", &fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0);
+    m.def("identity", &identity, py::arg("n"), py::arg("type") = DTypes::Real64);
+    m.def("rand", &mrand, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("seed") = 0);
 }

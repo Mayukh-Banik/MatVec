@@ -10,13 +10,6 @@
 #include <cerrno>
 #include <stdexcept>
 
-Matrix::Matrix()
-{
-	this->elements = 0;
-	this->type = Real64;
-	this->size = 0;
-}
-
 Matrix::Matrix(std::vector<int>& shape, DTypes type)
 {
 	this->shape = std::vector<int>(shape);

@@ -24,10 +24,7 @@
     <ClCompile Include="CreationRoutines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Files.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ASMDT.cpp">
+    <ClCompile Include="FileOps.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,6 +33,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreationRoutines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileOps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

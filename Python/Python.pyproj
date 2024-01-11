@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>29bf4a26-33db-464a-975b-30b0d79bb6c6</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_CreateInstances.py</StartupFile>
+    <StartupFile>Python.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

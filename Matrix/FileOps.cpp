@@ -1,4 +1,4 @@
-#include "Matrix.h"
+#include "FileOps.h"
 
 #include <iostream>
 #include <fstream>
@@ -6,9 +6,13 @@
 #include <string>
 #include <stdexcept>
 
-Matrix* Matrix::readCSV(const std::string& filepath, DTypes type)
+Matrix* readCSV(const std::string& filepath, DTypes type)
 {
     std::ifstream file(filepath);
+    if (!file.is_open() || file.fail())
+    {
+        throw std::logic_error("File wasn't valid or opening went wrong");
+    }
     std::string line;
     int rowCount = 0, colCount = 0;
     if (file.is_open()) 
@@ -79,6 +83,10 @@ Matrix* Matrix::readCSV(const std::string& filepath, DTypes type)
         }
 
         file.close();
+        if (file.fail())
+        {
+            throw std::logic_error("File wasn't closed properly, something was written probably");
+        }
     }
     else 
     {
@@ -88,9 +96,10 @@ Matrix* Matrix::readCSV(const std::string& filepath, DTypes type)
 }
 
 template<typename T>
-bool writeArrayToCSV(const T* array, int rowSize, const std::string& filename, int elements);
+bool writeArrayToCSV(const T* array, int rowSize, const std::string& filename, unsigned long long int elements);
 
-bool Matrix::writeCSV(const std::string& filepath, Matrix* m) {
+bool writeCSV(const std::string& filepath, Matrix* m) 
+{
     switch (m->type) {
     case DTypes::Int8:
         return writeArrayToCSV(static_cast<int8_t*>(m->matrix), m->shape[0], filepath, m->elements);
@@ -113,12 +122,13 @@ bool Matrix::writeCSV(const std::string& filepath, Matrix* m) {
 
 
 template<typename T>
-bool writeArrayToCSV(const T* array, int rowSize, const std::string& filename, int elements) 
+bool writeArrayToCSV(const T* array, int rowSize, const std::string& filename, unsigned long long int elements)
 {
-    int rows = elements / rowSize;
+    unsigned long long int rows = elements / rowSize;
     std::ofstream file(filename);
-    if (!file.is_open()) {
-        return false;
+    if (!file.is_open() || file.fail()) 
+    {
+        throw std::invalid_argument("Filename isn't open or isn't valid");
     }
 
     for (int i = 0; i < rows; ++i) 
@@ -133,18 +143,22 @@ bool writeArrayToCSV(const T* array, int rowSize, const std::string& filename, i
         }
         if (i < rows - 1)
         {
-            file << "\n"; // New line at the end of each row
+            file << "\n";
         }
     }
 
     file.close();
+    if (file.fail())
+    {
+        throw std::logic_error("File wasn't closed properly, something was written probably");
+    }
     return true;
 }
 
-template bool writeArrayToCSV<int8_t>(const int8_t* array, int rowSize, const std::string& filename, int elements);
-template bool writeArrayToCSV<int16_t>(const int16_t* array, int rowSize, const std::string& filename, int elements);
-template bool writeArrayToCSV<int32_t>(const int32_t* array, int rowSize, const std::string& filename, int elements);
-template bool writeArrayToCSV<int64_t>(const int64_t* array, int rowSize, const std::string& filename, int elements);
-template bool writeArrayToCSV<float>(const float* array, int rowSize, const std::string& filename, int elements);
-template bool writeArrayToCSV<double>(const double* array, int rowSize, const std::string& filename, int elements);
-template bool writeArrayToCSV<long double>(const long double* array, int rowSize, const std::string& filename, int elements);
+template bool writeArrayToCSV<int8_t>(const int8_t* array, int rowSize, const std::string& filename, unsigned long long int elements);
+template bool writeArrayToCSV<int16_t>(const int16_t* array, int rowSize, const std::string& filename, unsigned long long int elements);
+template bool writeArrayToCSV<int32_t>(const int32_t* array, int rowSize, const std::string& filename, unsigned long long int elements);
+template bool writeArrayToCSV<int64_t>(const int64_t* array, int rowSize, const std::string& filename, unsigned long long int elements);
+template bool writeArrayToCSV<float>(const float* array, int rowSize, const std::string& filename, unsigned long long int elements);
+template bool writeArrayToCSV<double>(const double* array, int rowSize, const std::string& filename, unsigned long long int elements);
+template bool writeArrayToCSV<long double>(const long double* array, int rowSize, const std::string& filename, unsigned long long int elements);

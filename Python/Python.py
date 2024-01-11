@@ -1,1 +1,4 @@
-print("Hello World")
+import matrix as mp
+
+
+print(dir(mp))
