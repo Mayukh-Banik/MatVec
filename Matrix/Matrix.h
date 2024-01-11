@@ -11,9 +11,10 @@ private:
 public:
 	void* matrix = nullptr;
 	std::vector<int> shape;
-	unsigned long long int elements;
-	DTypes type;
-	size_t size;
+	unsigned long long int elements = 0;
+	DTypes type = Real64;
+	size_t size = 0;
+	bool scalar = false;
 
 	Matrix();
 	Matrix(std::vector<int>& shape, DTypes type = Real64);
@@ -68,9 +69,20 @@ public:
 	static Matrix* rand(std::vector<int>& shape, DTypes type = Real64, int seed = 0);
 
 
-	static Matrix* array(std::vector<std::vector<int>>& value, DTypes type = Real64);
-
 	static Matrix* readCSV(const std::string& filepath, DTypes type = Real64);
 	static bool writeCSV(const std::string& filepath, Matrix* m);
+
+	template <typename T>
+	static Matrix* add(Matrix* m, T m1);
+	
+	template <typename T>
+	static Matrix* sub(Matrix* m1, T m2);
+
+	template <typename T>
+	static Matrix* div(Matrix* m1, T m2);
+
+	template <typename T>
+	static Matrix* mul(Matrix* m1, T m2);
+	static Matrix* transpose(Matrix* m1);
 };
 

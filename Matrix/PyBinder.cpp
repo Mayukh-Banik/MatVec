@@ -27,5 +27,6 @@ PYBIND11_MODULE(matrix, m) {
         .def_static("identity", &Matrix::identity, py::arg("n"), py::arg("type") = DTypes::Real64)
         .def_static("rand", &Matrix::rand, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("seed") = 0)
         .def_static("readCSV", &Matrix::readCSV, py::arg("file"), py::arg("type") = DTypes::Real64)
-        .def_static("writeCSV", &Matrix::writeCSV, py::arg("file"), py::arg("Matrix"), "Doc");
+        .def_static("writeCSV", &Matrix::writeCSV, py::arg("file"), py::arg("Matrix"))
+        ;
 }

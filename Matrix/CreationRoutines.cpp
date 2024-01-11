@@ -42,9 +42,7 @@ Matrix* Matrix::ones(std::vector<int>& shape, DTypes type)
 Matrix* Matrix::zero(std::vector<int>& shape, DTypes type)
 {
     Matrix* m = new Matrix(shape, type);
-    unsigned long long int product = m->elements;
-    size_t totalSizeInBytes = product * (type == 0 ? sizeof(int) : sizeof(double));
-    memset(m->matrix, 0, totalSizeInBytes);
+    memset(m->matrix, 0, m->size);
     return m;
 }
 
@@ -160,14 +158,4 @@ Matrix* Matrix::rand(std::vector<int>& shape, DTypes type, int seed)
         }
     }
     return m;
-}
-
-Matrix* Matrix::array(std::vector<std::vector<int>>& value, DTypes type)
-{
-    unsigned long long int elements = 0;
-    for (std::vector<int> temp : value)
-    {
-        elements = elements + temp.size();
-    }
-    return nullptr;
 }

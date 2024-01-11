@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ASMDT.cpp" />
     <ClCompile Include="CreationRoutines.cpp" />
     <ClCompile Include="Files.cpp" />
     <ClCompile Include="PyBinder.cpp" />

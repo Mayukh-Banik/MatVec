@@ -7,6 +7,8 @@
 #include "DTypes.h"
 #include <cstdint>
 #include <cfloat>
+#include <cerrno>
+#include <stdexcept>
 
 Matrix::Matrix()
 {
@@ -28,37 +30,33 @@ Matrix::Matrix(std::vector<int>& shape, DTypes type)
 	switch (type)
 	{
 	case DTypes::Int8:
-		this->size = sizeof(dInt8) * elements;
-		this->matrix = malloc(sizeof(dInt8) * elements);
+		this->size = sizeof(dInt8) * static_cast<size_t>(elements);
 		break;
 	case DTypes::Int16:
-		this->size = sizeof(dInt16) * elements;
-		this->matrix = malloc(sizeof(dInt16) * elements);
+		this->size = sizeof(dInt16) * static_cast<size_t>(elements);
 		break;
 	case DTypes::Int32:
-		this->size = sizeof(dInt32) * elements;
-		this->matrix = malloc(sizeof(dInt32) * elements);
+		this->size = sizeof(dInt32) * static_cast<size_t>(elements);
 		break;
 	case DTypes::Int64:
-		this->size = sizeof(dInt64) * elements;
-		this->matrix = malloc(sizeof(dInt64) * elements);\
+		this->size = sizeof(dInt64) * static_cast<size_t>(elements);
 		break;
 	case DTypes::Real32:
-		this->size = sizeof(dReal32) * elements;
-		this->matrix = malloc(sizeof(dReal32) * elements);
+		this->size = sizeof(dReal32) * static_cast<size_t>(elements);
 		break;
 	case DTypes::Real64:
-		this->size = sizeof(dReal64) * elements;
-		this->matrix = malloc(sizeof(dReal64) * elements);
+		this->size = sizeof(dReal64) * static_cast<size_t>(elements);
 		break;
 	case DTypes::Real64T:
-		this->size = sizeof(dReal64T) * elements;
-		this->matrix = malloc(sizeof(dReal64T) * elements);
+		this->size = sizeof(dReal64T) * static_cast<size_t>(elements);
 		break;
 	default:
-		this->size = sizeof(dReal64) * elements;
-		this->matrix = malloc(sizeof(dReal64) * elements);
-		break;
+		throw std::invalid_argument("DType was something other than ENUM values.");
+	}
+	this->matrix = malloc(this->size);
+	if (this->matrix == NULL)
+	{
+		throw std::bad_alloc();
 	}
 }
 
