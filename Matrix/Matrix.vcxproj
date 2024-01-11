@@ -144,7 +144,11 @@
     <ClInclude Include="CreationRoutines.h" />
     <ClInclude Include="DTypes.h" />
     <ClInclude Include="FileOps.h" />
+    <ClInclude Include="BasicOperations.h" />
     <ClInclude Include="Matrix.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BasicOperations.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

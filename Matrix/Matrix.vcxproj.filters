@@ -41,5 +41,13 @@
     <ClInclude Include="FileOps.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BasicOperations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BasicOperations.cu">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
