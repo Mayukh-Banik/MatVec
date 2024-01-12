@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicOperations.cpp" />
     <ClCompile Include="CreationRoutines.cpp" />
     <ClCompile Include="FileOps.cpp" />
     <ClCompile Include="PyBinder.cpp" />
@@ -146,9 +147,6 @@
     <ClInclude Include="FileOps.h" />
     <ClInclude Include="BasicOperations.h" />
     <ClInclude Include="Matrix.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="BasicOperations.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

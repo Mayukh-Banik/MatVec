@@ -4,6 +4,7 @@
 #include "DTypes.h"
 #include "CreationRoutines.h"
 #include "FileOps.h"
+#include "BasicOperations.h"
 
 PYBIND11_MODULE(matrix, m) {
     namespace py = pybind11;
@@ -31,4 +32,6 @@ PYBIND11_MODULE(matrix, m) {
     m.def("fill", &fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0);
     m.def("identity", &identity, py::arg("n"), py::arg("type") = DTypes::Real64);
     m.def("rand", &mrand, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("seed") = 0);
+
+    m.def("add", &mAdd);
 }
