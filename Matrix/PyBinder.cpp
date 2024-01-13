@@ -1,37 +1,28 @@
-#define PYBIND11_DOCSTRINGS
 #include <pybind11/pybind11.h>
-#include "Matrix.h"
-#include "DTypes.h"
-#include "CreationRoutines.h"
-#include "FileOps.h"
-#include "BasicOperations.h"
+#include <variant>
+#include <iostream>
+
+#include "DataTypes.h"
+#include "ClassDeclarations.h"
+
+namespace py = pybind11;
 
 PYBIND11_MODULE(matrix, m) {
-    namespace py = pybind11;
+    m.doc() = "A module to implement numpy functions from scalars -> vectors -> 2D Matrixes"; 
 
-    m.doc() = "A Poor Attempt at Recreating NumPy for Matrices Only";
-
-    py::enum_<DTypes>(m, "DTypes")
-        .value("Int8", DTypes::Int8)
-        .value("Int16", DTypes::Int16)
-        .value("Int32", DTypes::Int32)
-        .value("Int64", DTypes::Int64)
-        .value("Real32", DTypes::Real32)
-        .value("Real64", DTypes::Real64)
-        .value("Real64T", DTypes::Real64T)
+    py::enum_ < DTypes::DTypes > (m, "DTypes")
+        .value("dInt1", DTypes::dInt1)
+        .value("dInt2", DTypes::dInt2)
+        .value("dInt4", DTypes::dInt4)
+        .value("dInt8", DTypes::dInt8)
+        .value("duInt1", DTypes::duInt1)
+        .value("duInt2", DTypes::duInt2)
+        .value("duInt4", DTypes::duInt4)
+        .value("duInt8", DTypes::duInt8)
+        .value("dReal4", DTypes::dReal4)
+        .value("dReal8", DTypes::dReal8)
         .export_values();
 
-    py::class_<Matrix>(m, "matrix")
-        .def(py::init<std::vector<int>&, DTypes>(), py::arg("shape"), py::arg("type") = DTypes::Real64)
-        .def("__str__", &Matrix::toString);
-        
-    m.def("readCSV", readCSV, py::arg("file"), py::arg("type") = DTypes::Real64);
-    m.def("writeCSV", writeCSV, py::arg("file"), py::arg("Matrix"));
-    m.def("ones", &ones, py::arg("shape"), py::arg("type") = DTypes::Real64);
-    m.def("zero", &zero, py::arg("shape"), py::arg("type") = DTypes::Real64);
-    m.def("fill", &fill, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("fill") = 0);
-    m.def("identity", &identity, py::arg("n"), py::arg("type") = DTypes::Real64);
-    m.def("rand", &mrand, py::arg("shape"), py::arg("type") = DTypes::Real64, py::arg("seed") = 0);
-
-    m.def("add", &mAdd);
+    py::class_<Scalar>(m, "Scalar")
+        .def(py::init<py::object, DTypes::DTypes>(), py::arg("obj"), py::arg("type") = DTypes::dReal8);
 }

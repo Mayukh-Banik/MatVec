@@ -1,106 +1,32 @@
-#include "Matrix.h"
-//#include <stdlib.h>
-#include <cstdlib>
-#include <vector>
+#include "ClassDeclarations.h"
+#include <cassert>
 #include <iostream>
-#include <pybind11/stl.h>
-#include "DTypes.h"
-#include <cstdint>
-#include <cfloat>
-#include <cerrno>
-#include <stdexcept>
+#include <string>
+#include <variant>
 
-Matrix::Matrix(std::vector<int>& shape, DTypes type)
+Scalar::Scalar(pybind11::object obj, DTypes::DTypes type)
 {
-	this->shape = std::vector<int>(shape);
+	this->Array = nullptr;
 	this->type = type;
-	unsigned long long int product = 1;
-	for (int i = 0; i < shape.size(); i++)
-	{
-		product = product * shape[i];
-	}
-	this->elements = product;
+#define FUNCTION_APPLIER(x) Array = new x(); static_cast<x*>(Array)[0] = obj.cast<x>(); pointers = static_cast<x*>(Array); break; 
 	switch (type)
 	{
-	case DTypes::Int8:
-		this->size = sizeof(dInt8) * static_cast<size_t>(elements);
-		break;
-	case DTypes::Int16:
-		this->size = sizeof(dInt16) * static_cast<size_t>(elements);
-		break;
-	case DTypes::Int32:
-		this->size = sizeof(dInt32) * static_cast<size_t>(elements);
-		break;
-	case DTypes::Int64:
-		this->size = sizeof(dInt64) * static_cast<size_t>(elements);
-		break;
-	case DTypes::Real32:
-		this->size = sizeof(dReal32) * static_cast<size_t>(elements);
-		break;
-	case DTypes::Real64:
-		this->size = sizeof(dReal64) * static_cast<size_t>(elements);
-		break;
-	case DTypes::Real64T:
-		this->size = sizeof(dReal64T) * static_cast<size_t>(elements);
-		break;
-	default:
-		throw std::invalid_argument("DType was something other than ENUM values.");
+	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
+	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
+	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
+	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
+	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
+	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
+	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
+	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
+	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
+	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
+	default: throw std::invalid_argument("DTypes passed value was incorrect"); break;
 	}
-	this->matrix = malloc(this->size);
-	if (this->matrix == NULL)
-	{
-		throw std::bad_alloc();
-	}
+#undef FUNCTION_APPLIER
 }
 
-
-Matrix::~Matrix()
+Scalar::~Scalar()
 {
-	free(this->matrix);
-}
-
-
-std::string Matrix::toString() {
-	std::string result;
-	for (unsigned long long int i = 0; i < this->elements; i++)
-	{
-		switch (type)
-		{
-		case DTypes::Int8:
-			result += std::to_string(static_cast<int>(static_cast<dInt8*>(this->matrix)[i]));
-			break;
-		case DTypes::Int16:
-			result += std::to_string(static_cast<int>(static_cast<dInt16*>(this->matrix)[i]));
-			break;
-		case DTypes::Int32:
-			result += std::to_string(static_cast<int>(static_cast<dInt32*>(this->matrix)[i]));
-			break;
-		case DTypes::Int64:
-			result += std::to_string(static_cast<int>(static_cast<dInt64*>(this->matrix)[i]));
-			break;
-		case DTypes::Real32:
-			result += std::to_string(static_cast<double>(static_cast<dReal32*>(this->matrix)[i]));
-			break;
-		case DTypes::Real64:
-			result += std::to_string(static_cast<double>(static_cast<dReal64*>(this->matrix)[i]));
-			break;
-		case DTypes::Real64T:
-			result += std::to_string(static_cast<double>(static_cast<dReal64T*>(this->matrix)[i]));
-			break;
-		default:
-			result += std::to_string(static_cast<double>(static_cast<dReal64*>(this->matrix)[i]));
-			break;
-		}
-
-		if ((i+1) % this->shape[0] == 0)
-		{
-			result += "\n";
-		}
-		else
-		{
-			result += " ";
-		}
-	}
-
-	return result;
+	std::visit([](auto&& arg) { delete arg; }, pointers);
 }
