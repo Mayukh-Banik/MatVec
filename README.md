@@ -1,14 +1,15 @@
-# Matrix
+## Matrix
 
-Making some rudimentary NumPy functions in a c++ shared library to be accesible in Python.
+A simple library (hopefully) to implement Vector/Matrix operations.
 
-This is to complete Matrix/Tensor operations from scratch using Random, Ones, Zeros, and Filled 
-arrays.
+Initially aiming at basic operations (multiplication, transpose, etc) but will support several computing types: serial, BLAS, multithreading: C/C++ threads, and GPU versions.
 
-Loading from CSVs will be supported to ensure a test suite.
+# Installation Guide:
 
-The goal is to support multithreading, using C threads or GPUs.
+The PYD file is located in x64/Debug/matrix.pyd. Copy and paste into a Windows 11 system to import and use.
 
-Will support some scalar, vector, and Matrix operations.
+# Building:
 
-All errors will be uncaught and throw a Python exception. Exceptions will never be handled.
+This was made using the latest version of Visual Studio 2022 as of Jan 1. 
+Follow this guide here: https://learn.microsoft.com/en-us/visualstudio/python/working-with-c-cpp-python-in-visual-studio?view=vs-2022
+Set C++ version to 17. Python 3.12 is currently not supported by VS, alert boxes that can't be disabled always run, so don't use Python 3.12.
