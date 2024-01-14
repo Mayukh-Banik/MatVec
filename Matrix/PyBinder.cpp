@@ -23,6 +23,11 @@ PYBIND11_MODULE(matrix, m) {
         .value("dReal8", DTypes::dReal8)
         .export_values();
 
-    py::class_<Scalar>(m, "Scalar")
-        .def(py::init<py::object, DTypes::DTypes>(), py::arg("obj"), py::arg("type") = DTypes::dReal8);
+    /*py::class_<Scalar>(m, "Scalar")
+        .def(py::init<py::object, DTypes::DTypes>(), py::arg("obj"), py::arg("type") = DTypes::dReal8);*/
+
+    py::class_<Math>(m, "Matrix")
+        .def(py::init<pybind11::object, DTypes::DTypes>(), py::arg("obj"), py::arg("type") = DTypes::dReal8)
+        .def("__repr__", &Math::toString)
+        .def("__str__", &Math::toString);
 }

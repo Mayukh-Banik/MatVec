@@ -136,11 +136,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicHelperFunctions.cpp" />
     <ClCompile Include="Constructors.cpp" />
+    <ClCompile Include="CreationRoutines.cpp" />
     <ClCompile Include="PyBinder.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BasicHelperFunctions.h" />
     <ClInclude Include="ClassDeclarations.h" />
+    <ClInclude Include="CreationRoutines.h" />
     <ClInclude Include="DataTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

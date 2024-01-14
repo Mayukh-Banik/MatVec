@@ -5,6 +5,8 @@
 #include <pybind11/stl.h>
 #include <pybind11/pybind11.h>
 #include <vector>
+#include <exception>
+#include <string>
 
 
 class Scalar {
@@ -20,6 +22,8 @@ public:
 
     Scalar(pybind11::object obj, DTypes::DTypes type = DTypes::dReal8);
     ~Scalar();
+
+    std::string toString();
 };
 
 class Vector {
@@ -39,6 +43,8 @@ public:
 
     Vector(std::vector<int> shape, DTypes::DTypes type = DTypes::dReal8);
     ~Vector();
+
+    std::string toString();
 };
 
 class Matrix {
@@ -51,9 +57,13 @@ public:
     DataTypeVariant pointers;
     DTypes::DTypes type;
     void* Array;
+    unsigned long long int elements;
+    std::vector<int> shape;
 
     Matrix(std::vector<int> shape, DTypes::DTypes type = DTypes::dReal8);
     ~Matrix();
+
+    std::string toString();
 };
 
 class Math {
@@ -63,8 +73,15 @@ public:
     >;
     DataTypeVariant pointers;
 
-    Math(std::vector<int> shape, DTypes::DTypes type = DTypes::dReal8);
-    Math(double value, DTypes::DTypes type = DTypes::dReal8);
-    Math(int value, DTypes::DTypes type = DTypes::dReal8);
+    Scalar* scalar = nullptr;
+    Vector* vector = nullptr;
+    Matrix* matrix = nullptr;
+
+    DTypes::DTypes type;
+
+    Math(pybind11::object obj, DTypes::DTypes type = DTypes::dReal8);
+
     ~Math();
+
+    std::string toString();
 };

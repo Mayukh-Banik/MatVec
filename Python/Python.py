@@ -1,4 +1,5 @@
 import matrix as mp
 
-a = mp.Scalar(-10)
+a = mp.Matrix([4,4])
 
+print(a)
