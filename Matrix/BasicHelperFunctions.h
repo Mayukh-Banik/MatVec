@@ -5,4 +5,4 @@
 #include "DataTypes.h"
 
 template <typename T>
-std::string printing(T* array, unsigned long long int elements, int newline = 1);
+std::string templateArrayToString(T* array, unsigned long long int elements, int newline = 1);

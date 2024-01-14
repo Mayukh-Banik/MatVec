@@ -8,15 +8,13 @@
 #include <exception>
 #include <string>
 
+class Scalar;
+class Vector;
+class Matrix;
+class Math;
 
 class Scalar {
 public:
-    using DataTypeVariant = std::variant<
-        dInt1*, dInt2*, dInt4*, dInt8*,
-        duInt1*, duInt2*, duInt4*, duInt8*,
-        dReal4*, dReal8*
-    >;
-    DataTypeVariant pointers;
     DTypes::DTypes type;
     void* Array;
 
@@ -28,13 +26,6 @@ public:
 
 class Vector {
 public:
-    using DataTypeVariant = std::variant<
-        dInt1*, dInt2*, dInt4*, dInt8*,
-        duInt1*, duInt2*, duInt4*, duInt8*,
-        dReal4*, dReal8*
-    >;
-    DataTypeVariant pointers;
-
     DTypes::DTypes type;
     void* Array;
     unsigned long long int elements;
@@ -49,12 +40,6 @@ public:
 
 class Matrix {
 public:
-    using DataTypeVariant = std::variant<
-        dInt1*, dInt2*, dInt4*, dInt8*,
-        duInt1*, duInt2*, duInt4*, duInt8*,
-        dReal4*, dReal8*
-    >;
-    DataTypeVariant pointers;
     DTypes::DTypes type;
     void* Array;
     unsigned long long int elements;
@@ -68,20 +53,18 @@ public:
 
 class Math {
 public:
-    using DataTypeVariant = std::variant<
-        Scalar*, Vector*, Matrix*
-    >;
-    DataTypeVariant pointers;
-
     Scalar* scalar = nullptr;
     Vector* vector = nullptr;
     Matrix* matrix = nullptr;
 
     DTypes::DTypes type;
+    unsigned long long int elements;
+    void* Array = nullptr;
 
     Math(pybind11::object obj, DTypes::DTypes type = DTypes::dReal8);
 
     ~Math();
 
     std::string toString();
+    int getMathType();
 };

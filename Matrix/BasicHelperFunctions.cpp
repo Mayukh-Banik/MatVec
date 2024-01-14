@@ -11,7 +11,7 @@ std::string toString(const T& value) {
 
 
 template <typename T>
-std::string printing(T* array, unsigned long long int elements, int newline) {
+std::string templateArrayToString(T* array, unsigned long long int elements, int newline) {
     std::string temp;
     for (unsigned long long int i = 0; i < elements; i++) {
         temp += toString(array[i]) + ((i + 1) % newline == 0 ? "\n" : " ");
@@ -20,8 +20,8 @@ std::string printing(T* array, unsigned long long int elements, int newline) {
 }
 
 
-#define TEMPLATE_DEFINITION(x) template std::string printing<x>(x* array, unsigned long long int elements, int newline);
-template std::string printing<dInt1>(dInt1* array, unsigned long long int elements, int newline);
+#define TEMPLATE_DEFINITION(x) template std::string templateArrayToString<x>(x* array, unsigned long long int elements, int newline);
+template std::string templateArrayToString<dInt1>(dInt1* array, unsigned long long int elements, int newline);
 TEMPLATE_DEFINITION(dInt2)
 TEMPLATE_DEFINITION(dInt4)
 TEMPLATE_DEFINITION(dInt8)

@@ -9,7 +9,7 @@ Scalar::Scalar(pybind11::object obj, DTypes::DTypes type)
 {
 	this->Array = nullptr;
 	this->type = type;
-#define FUNCTION_APPLIER(x) this->Array = new x[1]; static_cast<x*>(this->Array)[0] = obj.cast<x>(); this->pointers = static_cast<x*>(this->Array); break; 
+#define FUNCTION_APPLIER(x) this->Array = new x[1]; static_cast<x*>(this->Array)[0] = obj.cast<x>(); break; 
 	switch (type)
 	{
 	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
@@ -81,7 +81,7 @@ Vector::Vector(std::vector<int> shape, DTypes::DTypes type)
 	}
 	this->elements = static_cast<decltype(this->elements)>(this->shape[0] * this->shape[1]);
 
-#define FUNCTION_APPLIER(x) this->Array = new x[this->elements]; pointers = static_cast<x*>(this->Array); break;
+#define FUNCTION_APPLIER(x) this->Array = new x[this->elements]; break;
 	switch (type)
 	{
 	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
@@ -121,10 +121,10 @@ Vector::~Vector()
 std::string Vector::toString()
 {
 	std::string temp = "Vector Dimensions: [" + std::to_string(shape[0]) + ", " + std::to_string(shape[1]) + "]\n";
-#define FUNCTION_APPLIER(x) temp = temp + printing(static_cast<x*>(Array), this->elements, this->shape[0]); break;
+#define FUNCTION_APPLIER(x) temp = temp + templateArrayToString(static_cast<x*>(Array), this->elements, this->shape[0]); break;
 	switch (this->type)
 	{
-	case DTypes::dInt1: temp = temp + printing(static_cast<dInt1*>(Array), this->elements, this->shape[0]); break;
+	case DTypes::dInt1: temp = temp + templateArrayToString(static_cast<dInt1*>(Array), this->elements, this->shape[0]); break;
 	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
 	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
 	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
@@ -146,7 +146,7 @@ Matrix::Matrix(std::vector<int> shape, DTypes::DTypes type)
 	this->shape = std::vector<int>(shape);
 	this->elements = static_cast<decltype(this->elements)>(this->shape[0] * this->shape[1]);
 
-#define FUNCTION_APPLIER(x) this->Array = new x[this->elements]; pointers = static_cast<x*>(this->Array); break;
+#define FUNCTION_APPLIER(x) this->Array = new x[this->elements]; break;
 	switch (type)
 	{
 	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
@@ -188,10 +188,10 @@ std::string Matrix::toString()
 {
 	std::string temp = "Matrix Dimensions: [" + std::to_string(shape[0]) + ", " + std::to_string(shape[1]) + "]\n";
 	std::cout << "Hello" << ((double*)Array)[0] << std::endl;
-#define FUNCTION_APPLIER(x) temp = temp + printing(static_cast<x*>(Array), this->elements, this->shape[0]); break;
+#define FUNCTION_APPLIER(x) temp = temp + templateArrayToString(static_cast<x*>(Array), this->elements, this->shape[0]); break;
 	switch (this->type)
 	{
-	case DTypes::dInt1: temp = temp + printing(static_cast<dInt1*>(Array), this->elements, this->shape[0]); break;
+	case DTypes::dInt1: temp = temp + templateArrayToString(static_cast<dInt1*>(Array), this->elements, this->shape[0]); break;
 	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
 	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
 	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
@@ -226,15 +226,21 @@ Math::Math(pybind11::object obj, DTypes::DTypes type)
 				if (shape[0] == 1 || shape[1] == 1)
 				{
 					this->vector = new Vector(shape, type);
+					this->elements = this->vector->elements;
+					this->Array = this->vector->Array;
 				}
 				else
 				{
 					this->matrix = new Matrix(shape, type);
+					this->elements = this->matrix->elements;
+					this->Array = this->matrix->Array;
 				}
 			}
 			else
 			{
 				this->vector = new Vector(shape, type);
+				this->elements = this->vector->elements;
+				this->Array = this->vector->Array;
 			}
 		}
 		catch (...) 
@@ -245,6 +251,8 @@ Math::Math(pybind11::object obj, DTypes::DTypes type)
 	else if (pybind11::isinstance<pybind11::int_>(obj) || pybind11::isinstance<pybind11::float_>(obj))
 	{
 		this->scalar = new Scalar(obj, type);
+		this->elements = 1;
+		this->Array = this->scalar->Array;
 	}
 	else 
 	{
@@ -273,5 +281,21 @@ std::string Math::toString()
 	else
 	{
 		return this->matrix->toString();
+	}
+}
+
+int Math::getMathType()
+{
+	if (this->matrix != nullptr)
+	{
+		return 0;
+	}
+	else if (this->vector != nullptr)
+	{
+		return 1;
+	}
+	else
+	{
+		return 2;
 	}
 }
