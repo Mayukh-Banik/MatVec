@@ -1,6 +1,6 @@
 ## Matrix
 
-A simple library (hopefully) to implement Vector/Matrix operations.
+A simple library (hopefully) to implement Vector/Matrix operations. Only for 32 bit Floating Point Values.
 
 Initially aiming at basic operations (multiplication, transpose, etc) but will support several computing types: serial, BLAS, multithreading: C/C++ threads, and GPU versions.
 
