@@ -1,4 +1,4 @@
-## Matrix
+## MatVec
 
 A simple library (hopefully) to implement Vector/Matrix operations. Only for 32 bit Floating Point Values.
 
