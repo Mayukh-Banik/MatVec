@@ -1,3 +1,3 @@
-import matrix as mp
+import MatVec as mp
 
 help(mp)

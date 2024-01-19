@@ -1,301 +1,120 @@
-#include "ClassDeclarations.h"
-#include <cassert>
-#include <iostream>
-#include <string>
-#include <variant>
-#include "BasicHelperFunctions.h"
+#include "Class Definitions.h"
+#include <exception>
 
-Scalar::Scalar(pybind11::object obj, DTypes::DTypes type)
+MatVec::MatVec(std::vector<int> shape) 
 {
-	this->Array = nullptr;
-	this->type = type;
-#define FUNCTION_APPLIER(x) this->Array = new x[1]; static_cast<x*>(this->Array)[0] = obj.cast<x>(); break; 
-	switch (type)
+	this->shape = shape;
+	this->isScalar = false;
+	this->isVector = false;
+	this->isMatrix = false;
+	this->elementCount = 1;
+	for (int dim : shape) 
 	{
-	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	default: throw std::invalid_argument("DTypes passed value was incorrect"); break;
+		this->elementCount *= dim;
 	}
-#undef FUNCTION_APPLIER
-}
-
-Scalar::~Scalar()
-{
-#define FUNCTION_APPLIER(x) delete[] static_cast<x*>(this->Array); break;
-	switch (this->type)
+	if (shape.size() == 1) 
 	{
-	case DTypes::dInt1: delete[] static_cast<dInt1*>(this->Array); break;
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	}
-#undef FUNCTION_APPLIER
-}
-
-std::string Scalar::toString()
-{
-	std::string temp = "Scalar Value: ";
-	switch (this->type)
-	{
-#define FUNCTION_APPLIER(x) temp = temp + std::to_string(static_cast<x*>(Array)[0]); break;
-	case DTypes::dInt1: temp = temp + std::to_string(static_cast<dInt1*>(Array)[0]); break;
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	}
-	return temp;
-}
-
-Vector::Vector(std::vector<int> shape, DTypes::DTypes type)
-{
-	this->Array = nullptr;
-	this->type = type;
-	if (shape.size() == 2)
-	{
-		this->shape = std::vector<int>(shape);
-	}
-	else
-	{
-		this->shape = std::vector<int>(shape);
-		this->shape.push_back(1);
-	}
-	this->elements = static_cast<decltype(this->elements)>(this->shape[0] * this->shape[1]);
-
-#define FUNCTION_APPLIER(x) this->Array = new x[this->elements]; break;
-	switch (type)
-	{
-	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt1)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	default: throw std::invalid_argument("DType was not valid"); break;
-	}
-#undef FUNCTION_APPLIER
-}
-
-Vector::~Vector()
-{
-#define FUNCTION_APPLIER(x) delete[] static_cast<x*>(this->Array); break;
-	switch (this->type)
-	{
-	case DTypes::dInt1: delete[] static_cast<dInt1*>(this->Array); break;
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	}
-#undef FUNCTION_APPLIER
-}
-
-std::string Vector::toString()
-{
-	std::string temp = "Vector Dimensions: [" + std::to_string(shape[0]) + ", " + std::to_string(shape[1]) + "]\n";
-#define FUNCTION_APPLIER(x) temp = temp + templateArrayToString(static_cast<x*>(Array), this->elements, this->shape[0]); break;
-	switch (this->type)
-	{
-	case DTypes::dInt1: temp = temp + templateArrayToString(static_cast<dInt1*>(Array), this->elements, this->shape[0]); break;
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	}
-#undef FUNCTION_APPLIER
-	return temp;
-}
-
-Matrix::Matrix(std::vector<int> shape, DTypes::DTypes type)
-{
-	this->Array = nullptr;
-	this->type = type;
-	this->shape = std::vector<int>(shape);
-	this->elements = static_cast<decltype(this->elements)>(this->shape[0] * this->shape[1]);
-
-#define FUNCTION_APPLIER(x) this->Array = new x[this->elements]; break;
-	switch (type)
-	{
-	case DTypes::dInt1: FUNCTION_APPLIER(dInt1)
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt1)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	default: throw std::invalid_argument("DType was not valid"); break;
-	}
-#undef FUNCTION_APPLIER
-}
-
-Matrix::~Matrix()
-{
-#define FUNCTION_APPLIER(x) delete[] static_cast<x*>(this->Array); break;
-	switch (this->type)
-	{
-	case DTypes::dInt1: delete[] static_cast<dInt1*>(this->Array); break;
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	default: throw std::invalid_argument("DType was not valid"); break;
-	}
-#undef FUNCTION_APPLIER
-}
-
-std::string Matrix::toString()
-{
-	std::string temp = "Matrix Dimensions: [" + std::to_string(shape[0]) + ", " + std::to_string(shape[1]) + "]\n";
-	std::cout << "Hello" << ((double*)Array)[0] << std::endl;
-#define FUNCTION_APPLIER(x) temp = temp + templateArrayToString(static_cast<x*>(Array), this->elements, this->shape[0]); break;
-	switch (this->type)
-	{
-	case DTypes::dInt1: temp = temp + templateArrayToString(static_cast<dInt1*>(Array), this->elements, this->shape[0]); break;
-	case DTypes::dInt2: FUNCTION_APPLIER(dInt2)
-	case DTypes::dInt4: FUNCTION_APPLIER(dInt4)
-	case DTypes::dInt8: FUNCTION_APPLIER(dInt8)
-	case DTypes::duInt1: FUNCTION_APPLIER(duInt1)
-	case DTypes::duInt2: FUNCTION_APPLIER(duInt2)
-	case DTypes::duInt4: FUNCTION_APPLIER(duInt4)
-	case DTypes::duInt8: FUNCTION_APPLIER(duInt8)
-	case DTypes::dReal4: FUNCTION_APPLIER(dReal4)
-	case DTypes::dReal8: FUNCTION_APPLIER(dReal8)
-	}
-#undef FUNCTION_APPLIER
-	return temp;
-}
-
-Math::Math(pybind11::object obj, DTypes::DTypes type)
-{
-	this->scalar = nullptr;
-	this->matrix = nullptr;
-	this->vector = nullptr;
-
-	if (pybind11::isinstance<pybind11::list>(obj)) 
-	{
-		try 
+		if (shape[0] == 1) 
 		{
-			std::vector<int> shape = obj.cast<std::vector<int>>();
-			if (shape.size() == 0 || shape.size() > 2)
-			{
-				throw std::invalid_argument("Number of parameters in list error");
-			}
-			if (shape.size() == 2)
-			{
-				if (shape[0] == 1 || shape[1] == 1)
-				{
-					this->vector = new Vector(shape, type);
-					this->elements = this->vector->elements;
-					this->Array = this->vector->Array;
-				}
-				else
-				{
-					this->matrix = new Matrix(shape, type);
-					this->elements = this->matrix->elements;
-					this->Array = this->matrix->Array;
-				}
-			}
-			else
-			{
-				this->vector = new Vector(shape, type);
-				this->elements = this->vector->elements;
-				this->Array = this->vector->Array;
-			}
+			this->isScalar = true;
+			this->shape.push_back(1);
 		}
-		catch (...) 
+		else 
 		{
-			throw std::invalid_argument("Converting to an int list error");
+			this->isVector = true;
+			this->shape.push_back(1);
 		}
 	}
-	else if (pybind11::isinstance<pybind11::int_>(obj) || pybind11::isinstance<pybind11::float_>(obj))
+	else if (shape.size() == 2) 
 	{
-		this->scalar = new Scalar(obj, type);
-		this->elements = 1;
-		this->Array = this->scalar->Array;
+		if ((shape[0] == 1 && shape[1] != 1) || 
+			(shape[1] == 1 && shape[0] != 1)) 
+		{
+			this->isVector = true;
+		}
+		else if (shape[0] != 1 && shape[1] != 1) 
+		{
+			this->isMatrix = true;
+		}
+		else if (shape[0] == 1 && shape[1] == 1) 
+		{
+			this->isScalar = true;
+		}
 	}
-	else 
+	else if (shape.size() > 2) 
 	{
-		throw std::invalid_argument("Invalid data type passed");
+		throw std::invalid_argument("Tensors not Supported Yet.");
 	}
-	this->type = type;
-}
-
-Math::~Math()
-{
-	delete this->matrix;
-	delete this->scalar;
-	delete this->vector;
-}
-
-std::string Math::toString()
-{
-	if (this->scalar != nullptr)
+	this->data = new float[elementCount];
+	if (this->isScalar)
 	{
-		return this->scalar->toString();
-	}
-	else if (this->vector != nullptr)
-	{
-		return this->vector->toString();
+		this->stride = 0;
 	}
 	else
 	{
-		return this->matrix->toString();
+		this->stride = 1;
 	}
 }
 
-int Math::getMathType()
+MatVec::MatVec(float n)
 {
-	if (this->matrix != nullptr)
+	this->data = new float(n);
+	this->shape = { 1,1 };
+	this->elementCount = 1;
+	this->isScalar = true;
+	this->isVector = false;
+	this->isMatrix = false;
+	this->stride = 0;
+}
+
+MatVec::~MatVec()
+{
+	delete[] this->data;
+}
+
+std::string MatVec::toString()
+{
+	std::string s;
+	if (this->isScalar)
 	{
-		return 0;
+		s = s + "Scalar\n";
 	}
-	else if (this->vector != nullptr)
+	else if (this->isVector)
 	{
-		return 1;
+		s = s + "Vector\n";
 	}
 	else
 	{
-		return 2;
+		s = s + "Matrix";
 	}
+	s = s + "Shape: ";
+	for (int i : this->shape)
+	{
+		s = s + std::to_string(i) + " ";
+	}
+	s = s + "\nNumber of values: " + std::to_string(this->elementCount) + "\nValues:\n";
+	for (unsigned long long int i = 0; i < this->elementCount; i++)
+	{
+		s = s + std::to_string(this->data[i]) + " ";
+		if (this->shape[0] % (i + 1) == 0)
+		{
+			s = s + "\n";
+		}
+	}
+	return s;
 }
+
+//class MatVec
+//{
+//	float* array;
+//	std::vector<int> shape;
+//	unsigned long long int elementCount;
+//	bool isScalar;
+//	bool isVector;
+//	bool isMatrix;
+//
+//	MatVec(std::vector<int> shape);
+//	MatVec(float n);
+//
+//	~MatVec();
+//};

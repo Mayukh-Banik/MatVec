@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>matrix</TargetName>
+    <TargetName>MatVec</TargetName>
     <TargetExt>.pyd</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -112,6 +112,7 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,16 +137,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasicHelperFunctions.cpp" />
     <ClCompile Include="Constructors.cpp" />
-    <ClCompile Include="CreationRoutines.cpp" />
     <ClCompile Include="PyBinder.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicHelperFunctions.h" />
-    <ClInclude Include="ClassDeclarations.h" />
-    <ClInclude Include="CreationRoutines.h" />
-    <ClInclude Include="DataTypes.h" />
+    <ClInclude Include="Class Definitions.h" />
+    <ClInclude Include="Creation Routines.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

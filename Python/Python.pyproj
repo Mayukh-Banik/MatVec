@@ -25,9 +25,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Python.py" />
-    <Compile Include="test_CreateInstances.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Matrix\Matrix.vcxproj">

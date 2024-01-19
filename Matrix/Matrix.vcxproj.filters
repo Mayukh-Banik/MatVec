@@ -21,24 +21,12 @@
     <ClCompile Include="Constructors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicHelperFunctions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CreationRoutines.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataTypes.h">
+    <ClInclude Include="Class Definitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ClassDeclarations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicHelperFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CreationRoutines.h">
+    <ClInclude Include="Creation Routines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
