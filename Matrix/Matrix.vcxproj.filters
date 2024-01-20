@@ -21,12 +21,21 @@
     <ClCompile Include="Constructors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Creation Routines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OperatorOverloads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Class Definitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Creation Routines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddSub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

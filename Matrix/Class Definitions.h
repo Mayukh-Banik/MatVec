@@ -21,4 +21,10 @@ public:
 	~MatVec();
 
 	std::string toString();
+
+	float& operator[](unsigned long long int i);
+
+    // Comparison operators
+    bool operator==(const MatVec& rhs) const;
+    bool operator!=(const MatVec& rhs) const;
 };
