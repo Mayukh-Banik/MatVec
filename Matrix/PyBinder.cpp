@@ -1,6 +1,8 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include "Class Definitions.h"
+#include "AddSub.h"
+#include "Creation Routines.h"
 
 namespace py = pybind11;
 
@@ -18,5 +20,12 @@ PYBIND11_MODULE(MatVec, m)
 		.def(py::init<float>())
 		.def("__str__", &MatVec:: toString);
 	
+	m.def("fill", &fill, py::arg("shape"), py::arg("value"));
+	m.def("zero", &zero, py::arg("shape"));
+	m.def("ones", &ones, py::arg("shape"));
+	m.def("identity", &identity, py::arg("n"));
+	m.def("empty", &empty, py::arg("shape"));
+
+	m.def("add", &add);
 }
 

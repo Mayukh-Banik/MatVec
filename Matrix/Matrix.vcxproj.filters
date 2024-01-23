@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\PythonBinder">
+      <UniqueIdentifier>{e43bf7a2-3141-41f4-a722-8b8f44cc7cbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PyBinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Constructors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -26,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="OperatorOverloads.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PyBinder.cpp">
+      <Filter>Source Files\PythonBinder</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AddSub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadCopy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

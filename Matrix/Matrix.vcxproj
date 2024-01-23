@@ -146,6 +146,7 @@
     <ClInclude Include="AddSub.h" />
     <ClInclude Include="Class Definitions.h" />
     <ClInclude Include="Creation Routines.h" />
+    <ClInclude Include="LoadCopy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

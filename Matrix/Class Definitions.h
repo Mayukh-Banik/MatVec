@@ -15,6 +15,17 @@ public:
 	bool isMatrix;
 	int stride;
 
+	MatVec()
+	{
+		this->data = nullptr;
+		this->shape = { 0 };
+		this->elementCount = 0;
+		this->isScalar = false;
+		this->isMatrix = false;
+		this->isVector = false;
+		this->stride = 0;
+	}
+
 	MatVec(std::vector<int> shape);
 	MatVec(float n);
 
@@ -27,4 +38,17 @@ public:
     // Comparison operators
     bool operator==(const MatVec& rhs) const;
     bool operator!=(const MatVec& rhs) const;
+
+	MatVec* newEmpty()
+	{
+		MatVec* x = new MatVec();
+		x->data = new float[this->elementCount];
+		x->shape = std::vector<int>(this->shape);
+		x->elementCount = this->elementCount;
+		x->isScalar = this->isScalar;
+		x->isVector = this->isVector;
+		x->isMatrix = this->isMatrix;
+		x->stride = this->stride;
+		return x;
+	}
 };

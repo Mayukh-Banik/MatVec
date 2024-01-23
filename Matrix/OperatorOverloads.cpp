@@ -1,6 +1,7 @@
 #include "Class Definitions.h"
 #include <string.h>
-float& MatVec::operator[](unsigned long long int i) {
+float& MatVec::operator[](unsigned long long int i) 
+{
 	if (!(this->isScalar) && 
 		i >= this->elementCount) 
 	{
