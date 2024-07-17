@@ -1,0 +1,3 @@
+/home/weket/Code/MatVec/build/CMakeFiles/MatVec.dir
+/home/weket/Code/MatVec/build/CMakeFiles/edit_cache.dir
+/home/weket/Code/MatVec/build/CMakeFiles/rebuild_cache.dir
