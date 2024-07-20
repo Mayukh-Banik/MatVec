@@ -19,7 +19,8 @@ CMakeFiles/MatVec.dir/src/temp.cpp.o
  /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/gil_safe_call_once.h
  /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/pybind11.h
  /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/typing.h
- /home/weket/Code/MatVec/include/js.h
+ /home/weket/Code/MatVec/include/Classes/MatVec.h
+ /home/weket/Code/MatVec/include/Constants/ClassConstants.h
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h
  /usr/include/asm-generic/errno-base.h

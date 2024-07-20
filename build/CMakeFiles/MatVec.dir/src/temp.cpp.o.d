@@ -1,6 +1,6 @@
 CMakeFiles/MatVec.dir/src/temp.cpp.o: \
  /home/weket/Code/MatVec/src/temp.cpp /usr/include/stdc-predef.h \
- /home/weket/Code/MatVec/include/js.h /usr/include/c++/11/iostream \
+ /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -351,4 +351,6 @@ CMakeFiles/MatVec.dir/src/temp.cpp.o: \
  /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/gil.h \
  /usr/include/c++/11/cassert \
  /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/gil_safe_call_once.h \
- /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/typing.h
+ /home/weket/.local/lib/python3.10/site-packages/pybind11/include/pybind11/typing.h \
+ /home/weket/Code/MatVec/include/Classes/MatVec.h \
+ /home/weket/Code/MatVec/include/Constants/ClassConstants.h

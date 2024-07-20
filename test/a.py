@@ -5,3 +5,5 @@ sys.path.append(relative_path)
 
 
 import MatVec as m # type: ignore
+
+print(help(m))
