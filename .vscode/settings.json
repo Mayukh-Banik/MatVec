@@ -1,3 +1,7 @@
 {
-    "makefile.makefilePath": "/home/weket/Code/MatVec/build"
+    "makefile.makefilePath": "/home/weket/Code/MatVec/build",
+    "files.associations": {
+        "array": "cpp",
+        "ostream": "cpp"
+    }
 }
