@@ -12,6 +12,7 @@ include_directories(
     include
     /usr/include/python3.10
     /home/weket/.local/lib/python3.10/site-packages/pybind11/include
+    /usr/local/cuda-12.4/include
 )
 
 file(GLOB_RECURSE SOURCE_FILES 

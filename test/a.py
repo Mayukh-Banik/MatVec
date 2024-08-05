@@ -6,7 +6,7 @@ sys.path.append(relative_path)
 from MatVec import MatVec as mv
 import MatVec as MM
 
-mv()
-mv(1)
+print("mv( [1] )")
 mv([1])
-print(MM.add(1,10))
+print("mv([[1],[2]])")
+mv([[1,2],[2,3]])

@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1408/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1409/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1408/bin/cmake -E rm -f
+RM = /snap/cmake/1409/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -69,31 +69,47 @@ include CMakeFiles/MatVec.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/MatVec.dir/flags.make
 
-CMakeFiles/MatVec.dir/src/temp.cpp.o: CMakeFiles/MatVec.dir/flags.make
-CMakeFiles/MatVec.dir/src/temp.cpp.o: /home/weket/Code/MatVec/src/temp.cpp
-CMakeFiles/MatVec.dir/src/temp.cpp.o: CMakeFiles/MatVec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/weket/Code/MatVec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MatVec.dir/src/temp.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MatVec.dir/src/temp.cpp.o -MF CMakeFiles/MatVec.dir/src/temp.cpp.o.d -o CMakeFiles/MatVec.dir/src/temp.cpp.o -c /home/weket/Code/MatVec/src/temp.cpp
+CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o: CMakeFiles/MatVec.dir/flags.make
+CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o: /home/weket/Code/MatVec/src/Bindings/Bindings.cpp
+CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o: CMakeFiles/MatVec.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/weket/Code/MatVec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o -MF CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o.d -o CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o -c /home/weket/Code/MatVec/src/Bindings/Bindings.cpp
 
-CMakeFiles/MatVec.dir/src/temp.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MatVec.dir/src/temp.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/weket/Code/MatVec/src/temp.cpp > CMakeFiles/MatVec.dir/src/temp.cpp.i
+CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/weket/Code/MatVec/src/Bindings/Bindings.cpp > CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.i
 
-CMakeFiles/MatVec.dir/src/temp.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MatVec.dir/src/temp.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/weket/Code/MatVec/src/temp.cpp -o CMakeFiles/MatVec.dir/src/temp.cpp.s
+CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/weket/Code/MatVec/src/Bindings/Bindings.cpp -o CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.s
+
+CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o: CMakeFiles/MatVec.dir/flags.make
+CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o: /home/weket/Code/MatVec/src/Bindings/Optional.cpp
+CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o: CMakeFiles/MatVec.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/weket/Code/MatVec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o -MF CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o.d -o CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o -c /home/weket/Code/MatVec/src/Bindings/Optional.cpp
+
+CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/weket/Code/MatVec/src/Bindings/Optional.cpp > CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.i
+
+CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/weket/Code/MatVec/src/Bindings/Optional.cpp -o CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.s
 
 # Object files for target MatVec
 MatVec_OBJECTS = \
-"CMakeFiles/MatVec.dir/src/temp.cpp.o"
+"CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o" \
+"CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o"
 
 # External object files for target MatVec
 MatVec_EXTERNAL_OBJECTS =
 
-MatVec.so: CMakeFiles/MatVec.dir/src/temp.cpp.o
+MatVec.so: CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o
+MatVec.so: CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o
 MatVec.so: CMakeFiles/MatVec.dir/build.make
 MatVec.so: CMakeFiles/MatVec.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/weket/Code/MatVec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library MatVec.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/weket/Code/MatVec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library MatVec.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/MatVec.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

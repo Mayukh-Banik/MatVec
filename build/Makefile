@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/cmake/1408/bin/cmake
+CMAKE_COMMAND = /snap/cmake/1409/bin/cmake
 
 # The command to remove a file.
-RM = /snap/cmake/1408/bin/cmake -E rm -f
+RM = /snap/cmake/1409/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/snap/cmake/1408/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/cmake/1409/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -129,29 +129,53 @@ MatVec/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/build
 .PHONY : MatVec/fast
 
-src/temp.o: src/temp.cpp.o
-.PHONY : src/temp.o
+src/Bindings/Bindings.o: src/Bindings/Bindings.cpp.o
+.PHONY : src/Bindings/Bindings.o
 
 # target to build an object file
-src/temp.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/temp.cpp.o
-.PHONY : src/temp.cpp.o
+src/Bindings/Bindings.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o
+.PHONY : src/Bindings/Bindings.cpp.o
 
-src/temp.i: src/temp.cpp.i
-.PHONY : src/temp.i
+src/Bindings/Bindings.i: src/Bindings/Bindings.cpp.i
+.PHONY : src/Bindings/Bindings.i
 
 # target to preprocess a source file
-src/temp.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/temp.cpp.i
-.PHONY : src/temp.cpp.i
+src/Bindings/Bindings.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.i
+.PHONY : src/Bindings/Bindings.cpp.i
 
-src/temp.s: src/temp.cpp.s
-.PHONY : src/temp.s
+src/Bindings/Bindings.s: src/Bindings/Bindings.cpp.s
+.PHONY : src/Bindings/Bindings.s
 
 # target to generate assembly for a file
-src/temp.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/temp.cpp.s
-.PHONY : src/temp.cpp.s
+src/Bindings/Bindings.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.s
+.PHONY : src/Bindings/Bindings.cpp.s
+
+src/Bindings/Optional.o: src/Bindings/Optional.cpp.o
+.PHONY : src/Bindings/Optional.o
+
+# target to build an object file
+src/Bindings/Optional.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o
+.PHONY : src/Bindings/Optional.cpp.o
+
+src/Bindings/Optional.i: src/Bindings/Optional.cpp.i
+.PHONY : src/Bindings/Optional.i
+
+# target to preprocess a source file
+src/Bindings/Optional.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.i
+.PHONY : src/Bindings/Optional.cpp.i
+
+src/Bindings/Optional.s: src/Bindings/Optional.cpp.s
+.PHONY : src/Bindings/Optional.s
+
+# target to generate assembly for a file
+src/Bindings/Optional.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/MatVec.dir/build.make CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.s
+.PHONY : src/Bindings/Optional.cpp.s
 
 # Help Target
 help:
@@ -162,9 +186,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... MatVec"
-	@echo "... src/temp.o"
-	@echo "... src/temp.i"
-	@echo "... src/temp.s"
+	@echo "... src/Bindings/Bindings.o"
+	@echo "... src/Bindings/Bindings.i"
+	@echo "... src/Bindings/Bindings.s"
+	@echo "... src/Bindings/Optional.o"
+	@echo "... src/Bindings/Optional.i"
+	@echo "... src/Bindings/Optional.s"
 .PHONY : help
 
 

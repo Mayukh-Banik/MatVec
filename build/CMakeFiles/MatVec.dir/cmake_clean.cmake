@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/MatVec.dir/src/temp.cpp.o"
-  "CMakeFiles/MatVec.dir/src/temp.cpp.o.d"
+  "CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o"
+  "CMakeFiles/MatVec.dir/src/Bindings/Bindings.cpp.o.d"
+  "CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o"
+  "CMakeFiles/MatVec.dir/src/Bindings/Optional.cpp.o.d"
   "MatVec.pdb"
   "MatVec.so"
 )
